@@ -30,20 +30,12 @@ app.use(express.static(__dirname + '/dist/play-node'));
 // Instruct the app to use the forceSSL middleware
 // app.use(forceSSL());
 
-showTimes = () => {
-  let result = '';
-  const times = process.env.TIMES || 5;
-  for (i = 0; i < times; i++) {
-    result += i + ' ';
-  }
-  return result;
-}
 app.get('/db', async (req, res) => {
   try {
     const client = await pool.connect();
     const result = await client.query('SELECT * FROM test_table');
     const results = { 'results': (result) ? result.rows : null};
-    res.render('pages/db', results );
+    res.send(JSON.stringify(results));
     client.release();
   } catch (err) {
     console.error(err);
