@@ -1,1 +1,33 @@
-<p>sudoku works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1>Can you solve this?</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <p>Select empty box, key-in your answer.</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="sketch-container">
+                <div id="sketch-holder"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row" [style.width.px]="sudokuSize">
+        <div class="col-3">
+            <button type="button" class="btn btn-primary" (click)="genNewQuestion()">New Question</button>
+        </div>
+        <div class="col-3">
+            <button type="button" class="btn btn-primary" (click)="resetQuestion()">Reset</button>
+        </div>
+        <div class="col-3">
+            <button type="button" class="btn btn-primary" (click)="showAnswer()">Show Answer</button>
+        </div>
+        <div class="col-3">
+            <button type="button" class="btn btn-primary" (click)="hintNextStep()">Hint Next Step</button>
+        </div>
+    </div>
+</div>
