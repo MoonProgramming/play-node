@@ -12,11 +12,11 @@
     <div class="row">
         <div class="col">
             <div class="sketch-container">
-                <div id="sketch-holder"></div>
+                <div id="sketch-holder" (window:resize)="onResize()"></div>
             </div>
         </div>
     </div>
-    <div class="row" [style.width.px]="sudokuSize">
+    <div class="row" [style.width.px]="sudokuInstance.size">
         <div class="col-3">
             <button type="button" class="btn btn-primary" (click)="genNewQuestion()">New Question</button>
         </div>

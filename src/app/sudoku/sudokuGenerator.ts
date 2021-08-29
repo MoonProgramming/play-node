@@ -25,6 +25,7 @@ export class SudokuGenerator {
       s.createCanvas(this.size, this.size);
     };
     s.draw = () => {
+      s.resizeCanvas(this.size, this.size);
       this.createSudokuFrame(s);
       this.enableGreyHover(s);
 
@@ -287,6 +288,7 @@ export class SudokuGenerator {
       }
     }
   }
+
 
 
   private fitSudokuRules(randomNum: string, xPoint: number, yPoint: number) {

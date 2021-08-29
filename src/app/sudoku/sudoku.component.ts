@@ -12,22 +12,26 @@ import { SudokuGenerator } from './sudokuGenerator';
 })
 export class SudokuComponent implements OnInit {
 
+  canvas: any;
   sketchHolder: HTMLElement | undefined;
-  sudokuSize: number = 540;
+  defaultSudokuSize: number = 424;
+  thresholdSize: number = 530;
   sudokuInstance: any;
   constructor() { }
 
   ngOnInit(): void {
     this.sketchHolder = document.getElementById("sketch-holder") || undefined;
-    this.sudokuInstance = new SudokuGenerator(this.sudokuSize);
-    let canvas = new p5(this.sudokuInstance.sketch, this.sketchHolder);
+    this.sudokuInstance = new SudokuGenerator(this.defaultSudokuSize);
+    this.canvas = new p5(this.sudokuInstance.sketch, this.sketchHolder);
+    this.onResize();
   }
 
   genNewQuestion() {
     if (this.sketchHolder) {
       this.sketchHolder.innerHTML = "";
-      this.sudokuInstance = new SudokuGenerator(this.sudokuSize);
-      let canvas = new p5(this.sudokuInstance.sketch, this.sketchHolder);
+      this.sudokuInstance = new SudokuGenerator(this.defaultSudokuSize);
+      this.canvas = new p5(this.sudokuInstance.sketch, this.sketchHolder);
+      this.onResize();
     }
   }
 
@@ -41,5 +45,15 @@ export class SudokuComponent implements OnInit {
 
   hintNextStep() {
     this.sudokuInstance.hintNextStep();
+  }
+
+  resizeCanvas(size: number) {
+    this.sudokuInstance.size = size;
+    this.canvas.redraw();
+  }
+
+  onResize() {
+    if (window.innerWidth < this.thresholdSize) this.resizeCanvas(window.innerWidth * 80/100);
+    else this.resizeCanvas(this.defaultSudokuSize);
   }
 }
