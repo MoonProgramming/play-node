@@ -33,7 +33,7 @@ export class SudokuGenerator {
       s.resizeCanvas(this.size, this.size + (this.size / 7));
       this.createSudokuFrame(s);
       this.enableGreyHover(s, isModifyEnabled, modifyX, modifyY);
-      this.enableNumpadInput(s);
+      // this.enableNumpadInput(s);
 
       // while mouse drag
       if (dragLocked) {
