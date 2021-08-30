@@ -75,35 +75,35 @@ export class SudokuGenerator {
       // uncomment to prevent any default behavior
       return false;
     }
-    s.mouseDragged = ((event: any) => {
-      dragX = s.mouseX;
-      dragY = s.mouseY;
-      if (this.mouseOverAnyNumpad) {
-        dragLocked = true;
-      }
-      // prevent default
-      return false;
-    });
-    s.mouseReleased = ((event: any) => {
-      if (dragLocked) {
-        isModifyEnabled = false;
-        if (s.mouseX > 0 && s.mouseX < this.size && s.mouseY > 0 && s.mouseY < this.size) {
-          let boxSize: number = this.size / 9;
-          modifyX = Math.floor(s.mouseX / boxSize);
-          modifyY = Math.floor(s.mouseY / boxSize);
-          if (!this.isFixedCoordinate(modifyX, modifyY)) {
-            isModifyEnabled = true;
-            this.hideIfAllowed(modifyY, modifyX);
-            this.sudokuQuestion[modifyY][modifyX] = this.selectedNum;
-            isModifyEnabled = false;
-            this.checkResult();
-          }
-        }
-      }
-      dragLocked = false;
-      // prevent default
-      return false;
-    });
+    // s.mouseDragged = ((event: any) => {
+    //   dragX = s.mouseX;
+    //   dragY = s.mouseY;
+    //   if (this.mouseOverAnyNumpad) {
+    //     dragLocked = true;
+    //   }
+    //   // prevent default
+    //   return false;
+    // });
+    // s.mouseReleased = ((event: any) => {
+    //   if (dragLocked) {
+    //     isModifyEnabled = false;
+    //     if (s.mouseX > 0 && s.mouseX < this.size && s.mouseY > 0 && s.mouseY < this.size) {
+    //       let boxSize: number = this.size / 9;
+    //       modifyX = Math.floor(s.mouseX / boxSize);
+    //       modifyY = Math.floor(s.mouseY / boxSize);
+    //       if (!this.isFixedCoordinate(modifyX, modifyY)) {
+    //         isModifyEnabled = true;
+    //         this.hideIfAllowed(modifyY, modifyX);
+    //         this.sudokuQuestion[modifyY][modifyX] = this.selectedNum;
+    //         isModifyEnabled = false;
+    //         this.checkResult();
+    //       }
+    //     }
+    //   }
+    //   dragLocked = false;
+    //   // prevent default
+    //   return false;
+    // });
   }
 
   private generateNewSudoku(s: any) {
