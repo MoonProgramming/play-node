@@ -45,6 +45,21 @@ export class SudokuGenerator {
     };
     s.mousePressed = (() => {
       let boxSize: number = this.size / 9;
+
+      let numberList = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+      for (let i = boxSize / 2, j = 0; i <= this.size; i += boxSize, j++) {
+        const disX = i - s.mouseX;
+        const disY = this.size + (this.size / 13) - s.mouseY;
+        const diameter = this.size / 10;
+        let mouseOverNumpad = s.sqrt(s.sq(disX) + s.sq(disY)) < diameter / 2;
+        if (mouseOverNumpad && isModifyEnabled) {
+          this.sudokuQuestion[modifyY][modifyX] = "" + numberList[j];
+          isModifyEnabled = false;
+          this.checkResult();
+          break;
+        } 
+      }
+
       if (s.mouseX > 0 && s.mouseX < this.size && s.mouseY > 0 && s.mouseY < this.size) {
         isModifyEnabled = false;
         modifyX = Math.floor(s.mouseX / boxSize);
@@ -54,10 +69,6 @@ export class SudokuGenerator {
           this.hideIfAllowed(modifyY, modifyX);
           this.sudokuQuestion[modifyY][modifyX] = '';
         }
-      } else if (this.mouseOverAnyNumpad && isModifyEnabled) {
-        this.sudokuQuestion[modifyY][modifyX] = this.selectedNum;
-        isModifyEnabled = false;
-        this.checkResult();
       }
     });
     s.keyTyped = () => {
@@ -75,35 +86,31 @@ export class SudokuGenerator {
       // uncomment to prevent any default behavior
       return false;
     }
-    // s.mouseDragged = ((event: any) => {
-    //   dragX = s.mouseX;
-    //   dragY = s.mouseY;
-    //   if (this.mouseOverAnyNumpad) {
-    //     dragLocked = true;
-    //   }
-    //   // prevent default
-    //   return false;
-    // });
-    // s.mouseReleased = ((event: any) => {
-    //   if (dragLocked) {
-    //     isModifyEnabled = false;
-    //     if (s.mouseX > 0 && s.mouseX < this.size && s.mouseY > 0 && s.mouseY < this.size) {
-    //       let boxSize: number = this.size / 9;
-    //       modifyX = Math.floor(s.mouseX / boxSize);
-    //       modifyY = Math.floor(s.mouseY / boxSize);
-    //       if (!this.isFixedCoordinate(modifyX, modifyY)) {
-    //         isModifyEnabled = true;
-    //         this.hideIfAllowed(modifyY, modifyX);
-    //         this.sudokuQuestion[modifyY][modifyX] = this.selectedNum;
-    //         isModifyEnabled = false;
-    //         this.checkResult();
-    //       }
-    //     }
-    //   }
-    //   dragLocked = false;
-    //   // prevent default
-    //   return false;
-    // });
+    s.mouseDragged = ((event: any) => {
+      dragX = s.mouseX;
+      dragY = s.mouseY;
+      if (this.mouseOverAnyNumpad) {
+        dragLocked = true;
+      }
+    });
+    s.mouseReleased = ((event: any) => {
+      if (dragLocked) {
+        isModifyEnabled = false;
+        if (s.mouseX > 0 && s.mouseX < this.size && s.mouseY > 0 && s.mouseY < this.size) {
+          let boxSize: number = this.size / 9;
+          modifyX = Math.floor(s.mouseX / boxSize);
+          modifyY = Math.floor(s.mouseY / boxSize);
+          if (!this.isFixedCoordinate(modifyX, modifyY)) {
+            isModifyEnabled = true;
+            this.hideIfAllowed(modifyY, modifyX);
+            this.sudokuQuestion[modifyY][modifyX] = this.selectedNum;
+            isModifyEnabled = false;
+            this.checkResult();
+          }
+        }
+      }
+      dragLocked = false;
+    });
   }
 
   private generateNewSudoku(s: any) {

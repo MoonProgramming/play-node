@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import * as p5 from 'p5';
 import { SudokuGenerator } from './sudokuGenerator';
 // import * as p5sound from 'p5/lib/addons/p5.sound';
@@ -10,17 +10,21 @@ import { SudokuGenerator } from './sudokuGenerator';
   templateUrl: './sudoku.component.html',
   styleUrls: ['./sudoku.component.scss']
 })
-export class SudokuComponent implements OnInit {
+export class SudokuComponent implements OnInit, OnDestroy {
 
-  canvas: any;
+  canvas: any = null;
   sketchHolder: HTMLElement | undefined;
-  defaultSudokuSize: number = 424;
-  thresholdSize: number = 530;
+  defaultSudokuSize: number = 415;
+  thresholdSize: number = 437;
   sudokuInstance: any;
   constructor() { }
 
   ngOnInit(): void {
     this.sketchHolder = document.getElementById("sketch-holder") || undefined;
+    if (this.canvas) {
+      this.canvas.remove();
+      this.canvas = null;
+    }
     this.sudokuInstance = new SudokuGenerator(this.defaultSudokuSize);
     this.canvas = new p5(this.sudokuInstance.sketch, this.sketchHolder);
     this.onResize();
@@ -28,6 +32,10 @@ export class SudokuComponent implements OnInit {
 
   genNewQuestion() {
     if (this.sketchHolder) {
+      if (this.canvas) {
+        this.canvas.remove();
+        this.canvas = null;
+      }
       this.sketchHolder.innerHTML = "";
       this.sudokuInstance = new SudokuGenerator(this.defaultSudokuSize);
       this.canvas = new p5(this.sudokuInstance.sketch, this.sketchHolder);
@@ -53,7 +61,14 @@ export class SudokuComponent implements OnInit {
   }
 
   onResize() {
-    if (window.innerWidth < this.thresholdSize) this.resizeCanvas(window.innerWidth * 80/100);
+    if (window.visualViewport.width < this.thresholdSize) this.resizeCanvas(window.visualViewport.width * 92/100);
     else this.resizeCanvas(this.defaultSudokuSize);
+  }
+
+  ngOnDestroy() {
+    if (this.canvas) {
+      this.canvas.remove();
+      this.canvas = null;
+    }
   }
 }
