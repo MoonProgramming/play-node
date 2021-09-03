@@ -8,6 +8,8 @@ export class SudokuGenerator {
   mouseOverAnyNumpad: boolean = false;
   selectedNum: string = '';
 
+  lightBlue: string = '#39C0ED';
+
   constructor(size: number) {
     this.size = size;
   }
@@ -577,7 +579,8 @@ export class SudokuGenerator {
       }
     }
     if (isModifyEnabled) {
-      s.fill(100);
+      // s.strokeWeight(0);
+      s.fill(this.lightBlue);
       s.square(modifyX * boxSize, modifyY * boxSize, boxSize);
     }
   }
@@ -586,6 +589,7 @@ export class SudokuGenerator {
     let numberList = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     let boxSize = this.size / 9;
     s.textStyle(s.BOLDITALIC);
+    s.strokeWeight(0);
     this.mouseOverAnyNumpad = false;
     for (let i = boxSize / 2, j = 0; i <= this.size; i += boxSize, j++) {
       const disX = i - s.mouseX;
@@ -597,10 +601,10 @@ export class SudokuGenerator {
         this.selectedNum = "" + numberList[j];
         s.fill(225);
       } else {
-        s.fill(255);
+        s.fill(this.lightBlue);
       }
       s.ellipse(i, this.size + (this.size / 13), this.size / 10);
-      s.fill(0);
+      s.fill(255);
       s.text(numberList[j], i - (this.size / 52), this.size + (this.size / 10));
     }
   }

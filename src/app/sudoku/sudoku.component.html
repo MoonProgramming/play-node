@@ -1,11 +1,17 @@
 <div class="row">
-    <div class="col">
+    <div class="col-11">
         <h1>Can you solve this?</h1>
+    </div>
+    <div class="col-1">
+        <button type="button" class="btn btn-secondary me-2" placement="bottom"
+            mdbPopover="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+            Popover on bottom
+        </button>
     </div>
 </div>
 <div class="row">
     <div class="col">
-        <p>Select empty box, key-in your answer.</p>
+        <p>Select empty box, key-in/click/drag your numbers.</p>
     </div>
 </div>
 <div class="row">
@@ -17,15 +23,15 @@
 </div>
 <div class="row" [style.width.px]="sudokuInstance.size">
     <div class="col-3">
-        <button type="button" class="btn btn-primary" (click)="genNewQuestion()">New Question</button>
+        <button type="button" class="btn btn-info" (click)="genNewQuestion()">New Question</button>
     </div>
     <div class="col-3">
-        <button type="button" class="btn btn-primary" (click)="resetQuestion()">Reset</button>
+        <button type="button" class="btn btn-info" (click)="resetQuestion()">Reset</button>
     </div>
     <div class="col-3">
-        <button type="button" class="btn btn-primary" (click)="showAnswer()">Show Answer</button>
+        <button type="button" class="btn btn-info" (click)="showAnswer()">Show Answer</button>
     </div>
     <div class="col-3">
-        <button type="button" class="btn btn-primary" (click)="hintNextStep()">Hint Next Step</button>
+        <button type="button" class="btn btn-info" (click)="hintNextStep()">Hint Next Step</button>
     </div>
 </div>
