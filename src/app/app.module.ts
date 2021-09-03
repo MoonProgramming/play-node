@@ -6,6 +6,7 @@ import { TemplateModule } from './template/template.module';
 
 import { AppComponent } from './app.component';
 import { LayoutComponent } from './layout/layout.component';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { LayoutComponent } from './layout/layout.component';
     AppRoutingModule,
     RouterModule,
     TemplateModule,
+    MDBBootstrapModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
