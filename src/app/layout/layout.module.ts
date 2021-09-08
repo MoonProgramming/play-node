@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 
 import { HomeComponent } from '../home/home.component';
 import { SudokuComponent } from '../sudoku/sudoku.component';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 const route: Routes = [
   { path: 'home', component: HomeComponent },
@@ -12,11 +13,13 @@ const route: Routes = [
 
 @NgModule({
   declarations: [
-    HomeComponent
+    HomeComponent,
+    SudokuComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(route),
+    MDBBootstrapModule.forRoot(),
   ]
 })
 export class LayoutModule { }

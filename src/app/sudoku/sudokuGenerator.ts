@@ -8,7 +8,7 @@ export class SudokuGenerator {
   mouseOverAnyNumpad: boolean = false;
   selectedNum: string = '';
 
-  lightBlue: string = '#39C0ED';
+  lightBlue: string = '#33b5e5';
 
   constructor(size: number) {
     this.size = size;
