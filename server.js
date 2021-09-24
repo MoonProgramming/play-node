@@ -42,7 +42,7 @@ app.get('/db', async (req, res) => {
     res.send("Error " + err);
   }
 });
-app.get('/env', (req, res) => res.send(console.log(process.env)));
+// app.get('/env', (req, res) => res.send(console.log(process.env)));
 // For all GET requests, send back index.html so that PathLocationStrategy can be used
 app.get('/*', function(req, res) {
     res.sendFile(path.join(__dirname + '/dist/play-node/index.html'));

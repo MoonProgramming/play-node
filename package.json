@@ -22,7 +22,7 @@
   "bugs": {
     "url": "https://github.com/MoonProgramming/play-node/issues"
   },
-  "homepage": "https://moon-programming.herokuapp.com/",
+  "homepage": "https://play-node.herokuapp.com/",
   "dependencies": {
     "@angular/animations": "^12.2.4",
     "@angular/cdk": "^9.0.0",
